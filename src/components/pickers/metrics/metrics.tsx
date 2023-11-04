@@ -22,61 +22,6 @@ export const Metrics = ({
   const [showModal, setShowModal] = useState<boolean>(false);
   const [metricItem, setMetricItem] = useState<MetaDataField | null>(null);
   const [agregator, setAgregator] = useState<AggregationType | null>(null);
-  const [draggedItem, setDraggedItem] = useState<MetaDataField | null>(null);
-
-  // const handleDragStart = (
-  //   e: React.DragEvent<HTMLDivElement>,
-  //   item: MetaDataField
-  // ) => {
-  //   e.dataTransfer.effectAllowed = "move";
-  //   e.dataTransfer.setData("text/html", item);
-  //   setDraggedItem(item);
-  // };
-
-  // const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-  //   e.preventDefault();
-  //   e.currentTarget.classList.add(styles.over);
-  // };
-
-  // const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-  //   e.preventDefault();
-  // };
-
-  // const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-  //   e.preventDefault();
-  //   e.currentTarget.classList.remove(styles.over);
-  // };
-
-  // const handleDragDrop = (item: MetaDataField) => {
-  //   if (draggedItem !== null && draggedItem.id !== item.id) {
-  //     // swap draggedItem and item
-  //     for (let i = 0; i < reqBody.columnFields.length; i++) {
-  //       const element = reqBody.columnFields[i];
-  //       if (element.fieldId === draggedItem.id) {
-  //         element.fieldId = item.id;
-  //       } else if (element.fieldId === item.id) {
-  //         element.fieldId = draggedItem.id;
-  //       }
-  //     }
-
-  //     for (let i = 0; i < reqBody.rowFields.length; i++) {
-  //       const element = reqBody.rowFields[i];
-  //       if (element.fieldId === draggedItem.id) {
-  //         element.fieldId = item.id;
-  //       } else if (element.fieldId === item.id) {
-  //         element.fieldId = draggedItem.id;
-  //       }
-  //     }
-  //   }
-
-  //   setReqBody({ ...reqBody });
-  //   setDraggedItem(null);
-  // };
-
-  // const handleDragEnd = () => {
-  //   setDraggedItem(null);
-  //   document.querySelector("." + styles.over)?.classList.remove(styles.over);
-  // };
 
   const addNewItem = () => {
     if (metricItem && agregator) {
@@ -120,20 +65,21 @@ export const Metrics = ({
         <ul>
           {reqBody.metrics.map((item) => (
             <li key={item.field.fieldId + item.aggregationType}>
-              <div
-                className={styles.draggable + " card"}
-                // draggable
-                // onDragStart={(e) => handleDragStart(e, item)}
-                // onDragEnter={handleDragEnter}
-                // onDragOver={handleDragOver}
-                // onDragLeave={handleDragLeave}
-                // onDrop={() => handleDragDrop(item)}
-                // onDragEnd={handleDragEnd}
-              >
-                {item.aggregationType + " -> " + item.field.fieldId}
-              </div>
-              <div className={styles.remover} onClick={() => removeItem(item)}>
-                <img src="icons/remove.svg" alt="Убрать" />
+              <div className={styles.metric + " card"}>
+                <p>
+                  {item.aggregationType +
+                    ": (" +
+                    meta.fields.filter(
+                      (metaItem) => metaItem.id === item.field.fieldId
+                    )[0].name +
+                    ")"}
+                </p>
+                <div
+                  className={styles.remover}
+                  onClick={() => removeItem(item)}
+                >
+                  <img src="icons/remove.svg" alt="Убрать" />
+                </div>
               </div>
             </li>
           ))}

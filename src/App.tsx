@@ -7,7 +7,6 @@ import { getCube } from "./http/getCube.js";
 import { getMETA } from "./http/getMeta.js";
 import { CubeData, MetaData } from "./types/apiResponse.js";
 import { RequestCubeBody } from "./types/requestCubeBody.js";
-import { getConfig } from "./utils/getConfig.js";
 
 const InitReqBody: RequestCubeBody = {
   columnFields: [],
@@ -20,50 +19,6 @@ const InitReqBody: RequestCubeBody = {
   rowsInterval: {
     from: 0,
     count: 1000,
-  },
-  filterGroup: {
-    childGroups: [],
-    filters: [],
-    invertResult: false,
-    operationType: "AND",
-  },
-  metricFilterGroup: {
-    childGroups: [],
-    filters: [],
-    invertResult: false,
-    operationType: "AND",
-  },
-};
-
-const test_reqbody: RequestCubeBody = {
-  columnFields: [
-    {
-      fieldId: 18,
-      fieldType: "REPORT_FIELD",
-    },
-  ],
-  rowFields: [
-    {
-      fieldId: 15,
-      fieldType: "REPORT_FIELD",
-    },
-  ],
-  metrics: [
-    {
-      field: {
-        fieldId: 19,
-        fieldType: "REPORT_FIELD",
-      },
-      aggregationType: "SUM",
-    },
-  ],
-  columnsInterval: {
-    from: 0,
-    count: 39,
-  },
-  rowsInterval: {
-    from: 0,
-    count: 135,
   },
   filterGroup: {
     childGroups: [],
@@ -93,7 +48,7 @@ function App() {
   return (
     <>
       {META && (
-        <div style={{display: 'flex'}}>
+        <div style={{ display: "flex", justifyContent: 'space-between', gap: '20px', padding: '30px 5vw 0' }}>
           <ColRows reqBody={cubeReq} meta={META} setReqBody={setCubeReq} />
           <Metrics reqBody={cubeReq} meta={META} setReqBody={setCubeReq} />
         </div>

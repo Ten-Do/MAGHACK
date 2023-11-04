@@ -15,9 +15,7 @@ export const ColRows = ({
   setReqBody: React.Dispatch<React.SetStateAction<RequestCubeBody>>;
 }) => {
   const { rows, cols, free } = getConfig(reqBody, meta);
-  const [place, setPlace] = useState<
-    "columnFields" | "rowFields" | null
-  >(null);
+  const [place, setPlace] = useState<"columnFields" | "rowFields" | null>(null);
   const [draggedItem, setDraggedItem] = useState<MetaDataField | null>(null);
 
   const handleDragStart = (
@@ -91,7 +89,7 @@ export const ColRows = ({
   };
 
   return (
-    <div style={{ display: "flex", gap: "20px" }}>
+    <>
       <div className={styles.container}>
         <h2>Ряды</h2>
         <div
@@ -163,6 +161,7 @@ export const ColRows = ({
           ))}
         </ul>
       </div>
+      {/* ========================== */}
       {place && (
         <Modal
           hide={() => {
@@ -181,6 +180,6 @@ export const ColRows = ({
           ))}
         </Modal>
       )}
-    </div>
+    </>
   );
 };
