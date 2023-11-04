@@ -9,7 +9,11 @@ export const getCube = async (
     ...BASE_CONFIG,
     body: JSON.stringify(body),
   })
-    .then((response) => response.json() as unknown as ApiResponse<CubeData>)
+    .then((response) => {
+      if (response.ok)
+        return response.json() as unknown as ApiResponse<CubeData>;
+      else throw response.json();
+    })
     .then((resJSON) => {
       if (resJSON.success) {
         return resJSON.data;
@@ -17,6 +21,6 @@ export const getCube = async (
     })
     .catch((err) => {
       console.log(err);
-      return null;
+      throw err.message || err;
     });
 };

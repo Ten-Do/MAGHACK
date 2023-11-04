@@ -301,3 +301,29 @@ textarea.error {
 }
 
 /* =========================== */
+
+/* The snackbar - position it at the bottom and in the middle of the screen  */
+#snackbar {
+  min-width: min(250px, 80vw); /* Set a default minimum width */
+  background-color: #333; /* Black background color */
+  color: rgb(var(--foreground-rgb)); /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: var(--border-radius); /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 10; /* Add a z-index if needed */
+  bottom: 30px; /* 30px from the bottom */
+  left: 20px;
+  margin-right: 20px;
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+th, td {
+  min-width: 150px !important;
+  max-width: 150px !important;
+  width: 150px !important;
+}

@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+.width200 {
+  max-width: 200px !important;
+  min-width: 200px !important;
+  width: 200px !important;
+}
+
 .table {
   max-height: 80vh;
   width: 100%;
@@ -18,7 +24,8 @@
   border-collapse: collapse;
 }
 
-.table_container th, td {
+.table_container th,
+td {
   padding: 8px;
   border: 1px solid rgba(var(--callout-border-rgba));
   text-align: center;
@@ -41,7 +48,12 @@
   transition: all 0.3s ease;
 }
 
-.table_container tr:hover {
+.table_container .metric_table tr:hover {
   background-color: rgba(var(--accent-rgba));
   transition: all 0.3s ease;
+}
+
+.metric_table {
+  margin-left: -1px;
+  margin-top: -1px;
 }

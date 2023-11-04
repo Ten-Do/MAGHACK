@@ -2,7 +2,6 @@ import { MetaData, MetaDataField } from "@/types/apiResponse.js";
 import {
   RequestCubeBody,
   AggregationType,
-  Field,
   Metric,
 } from "@/types/requestCubeBody.js";
 import styles from "../styles.module.css";
