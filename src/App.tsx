@@ -5,42 +5,16 @@ import { Metrics } from "./components/pickers/metrics/metrics.js";
 import { NewTable } from "./components/table/newTable.js";
 import { getCube } from "./http/getCube.js";
 import { getMETA } from "./http/getMeta.js";
+import { InitReqBody } from "./http/initReqBody.js";
 import { CubeData, MetaData } from "./types/apiResponse.js";
 import { RequestCubeBody } from "./types/requestCubeBody.js";
+import { createAndPopulateTable } from "./utils/export.js";
 import { showSnackbar } from "./utils/showSnackbar.js";
-
-const InitReqBody: RequestCubeBody = {
-  columnFields: [],
-  rowFields: [],
-  metrics: [],
-  columnsInterval: {
-    from: 0,
-    count: 100,
-  },
-  rowsInterval: {
-    from: 0,
-    count: 100,
-  },
-  filterGroup: {
-    childGroups: [],
-    filters: [],
-    invertResult: false,
-    operationType: "AND",
-  },
-  metricFilterGroup: {
-    childGroups: [],
-    filters: [],
-    invertResult: false,
-    operationType: "AND",
-  },
-  columnSort: [],
-  rowSort: [],
-};
 
 function App() {
   const [META, setMETA] = useState<MetaData | null>(null);
   const [cube, setCube] = useState<CubeData | null>(null);
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cubeReq, setCubeReq] = useState<RequestCubeBody>(InitReqBody);
   useEffect(() => {
@@ -65,7 +39,7 @@ function App() {
         .finally(() => setIsLoading(false));
     }
   }, [cubeReq]);
-  const cr = JSON.parse(localStorage.getItem("backup") || "");
+  const cr = JSON.parse(localStorage.getItem("backup")) || cubeReq;
   return (
     <>
       {isLoading && <Loader />}
@@ -87,15 +61,32 @@ function App() {
         cube.rowValues[0].length +
         cube.metricValues.length &&
       META ? (
-        <NewTable
-          reqBody={cr}
-          meta={META}
-          data={cube}
-          setReqBody={setCubeReq}
-        />
+        <>
+          <NewTable
+            reqBody={cr}
+            meta={META}
+            data={cube}
+            setReqBody={setCubeReq}
+          />
+          <button
+            style={{
+              position: "absolute",
+              bottom: "20px",
+              left: "20vw",
+              right: "20vw",
+            }}
+            className="btn card access"
+            onClick={() => {
+              createAndPopulateTable(cr, META);
+            }}
+          >
+            Экспортировать данные в XLSX таблицу
+          </button>
+        </>
       ) : null}
     </>
   );
 }
+
 
 export default App;
