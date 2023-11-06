@@ -6,11 +6,11 @@ export const InitReqBody: RequestCubeBody = JSON.parse(localStorage.getItem('bac
   metrics: [],
   columnsInterval: {
     from: 0,
-    count: 100,
+    count: 20,
   },
   rowsInterval: {
     from: 0,
-    count: 100,
+    count: 20,
   },
   filterGroup: {
     childGroups: [],

@@ -3,6 +3,7 @@ import { Loader } from "./components/loader/loader.js";
 import { ColRows } from "./components/pickers/colrows/colrows.js";
 import { Metrics } from "./components/pickers/metrics/metrics.js";
 import { NewTable } from "./components/table/newTable.js";
+import { Table } from "./components/table/table.js";
 import { getCube } from "./http/getCube.js";
 import { getMETA } from "./http/getMeta.js";
 import { InitReqBody } from "./http/initReqBody.js";
@@ -57,9 +58,6 @@ function App() {
         </div>
       )}
       {cube &&
-      cube.columnValues[0].length +
-        cube.rowValues[0].length +
-        cube.metricValues.length &&
       META ? (
         <>
           <NewTable

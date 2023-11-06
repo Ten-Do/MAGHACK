@@ -45,7 +45,7 @@ export const FilterModalContent = ({
         <div className={styles.args}>
           {FILTERS_DESCRIPTIONS[filter].args === -1 && (
             <>
-              <h1>Ввдедите параметры</h1>
+              <h1>Введите параметры</h1>
               <div>
                 <form
                   onSubmit={(e) => {
@@ -84,7 +84,7 @@ export const FilterModalContent = ({
           )}
           {FILTERS_DESCRIPTIONS[filter].args > 0 && (
             <>
-              <h1>Ввдедите параметры</h1>
+              <h1>Введите параметры</h1>
               {Array.from(
                 { length: FILTERS_DESCRIPTIONS[filter].args },
                 (v, i) => i

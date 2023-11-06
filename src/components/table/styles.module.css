@@ -6,6 +6,10 @@
   overflow: hidden;
 }
 
+.th {
+  backdrop-filter: brightness(0.7);
+}
+
 .width200 {
   max-width: 200px !important;
   min-width: 200px !important;
@@ -60,4 +64,8 @@ td {
 
 .metric_table tr:nth-child(odd) {
   background-color: rgba(var(--background-primary-rgb), 0.7);
+}
+
+.table tr:hover {
+  background-color: rgba(var(--accent-rgba));
 }
