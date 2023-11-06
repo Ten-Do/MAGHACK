@@ -20,11 +20,13 @@ export const NewTable = ({
 }) => {
   const { rows, cols } = getConfig(reqBody, meta);
   const { columnValues, rowValues, metricValues } = data;
+  // 
   const [split, setSplit] = useState(true);
   const [tupleValue, setTupleValue] = useState<{
     value: string;
     dim: string;
   } | null>(null);
+  // 
   const fields: string[] = [];
   meta.fields.forEach((elem) => (fields[elem.id] = elem.name));
   const handleFilterChange = (
@@ -73,6 +75,7 @@ export const NewTable = ({
       return { ...curr };
     });
   };
+  //
   const addSort = (index: number) => {
     setReqBody((curr) => {
       return {
@@ -91,6 +94,7 @@ export const NewTable = ({
       };
     });
   };
+  //
   return (
     <>
       <div>
