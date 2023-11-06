@@ -322,8 +322,40 @@ textarea.error {
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-th, td {
+th,
+td {
   min-width: 150px !important;
   max-width: 150px !important;
   width: 150px !important;
 }
+
+/* tooltip */
+.info .tooltip {
+  position: absolute;
+  top: -40px;
+  left: -50%;
+  z-index: 2;
+  font-size: var(--font-size-secondary);
+  background-color: rgba(var(--callout-rgba));
+  border-radius: var(--border-radius);
+  padding: 10px 15px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  border: 1px solid rgba(var(--callout-border-rgba));
+}
+
+.info {
+  position: relative;
+  display: inline-block;
+}
+
+.info:hover .tooltip {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.active {
+  background-color: rgba(var(--accent-rgba)) !important;
+}
+
+

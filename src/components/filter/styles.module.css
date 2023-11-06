@@ -1,0 +1,57 @@
+.button {
+  width: 50px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.validators {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.imgContainer {
+  max-width: 50px;
+  min-width: 50px;
+  background-color: inherit;
+  border: 0;
+}
+
+.imgContainer img {
+  max-width: 100%;
+}
+
+.input_container {
+  display: flex;
+  gap: 30px;
+}
+
+.input_container input {
+  flex: 1;
+}
+
+.filterArgs {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.filterArg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filterArg p {
+  margin: 0 !important;
+}
+
+.args {
+  margin-top: 40px;
+}
+
+.submit {
+  margin-top: 40px;
+}

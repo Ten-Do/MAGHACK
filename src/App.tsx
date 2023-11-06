@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { Loader } from "./components/loader/loader.js";
 import { ColRows } from "./components/pickers/colrows/colrows.js";
-// import { FilterField } from "./components/filter/filterField.js";
 import { Metrics } from "./components/pickers/metrics/metrics.js";
 import { NewTable } from "./components/table/newTable.js";
 import { getCube } from "./http/getCube.js";
@@ -15,11 +15,11 @@ const InitReqBody: RequestCubeBody = {
   metrics: [],
   columnsInterval: {
     from: 0,
-    count: 10,
+    count: 100,
   },
   rowsInterval: {
     from: 0,
-    count: 10,
+    count: 100,
   },
   filterGroup: {
     childGroups: [],
@@ -33,25 +33,42 @@ const InitReqBody: RequestCubeBody = {
     invertResult: false,
     operationType: "AND",
   },
+  columnSort: [],
+  rowSort: [],
 };
 
 function App() {
   const [META, setMETA] = useState<MetaData | null>(null);
   const [cube, setCube] = useState<CubeData | null>(null);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cubeReq, setCubeReq] = useState<RequestCubeBody>(InitReqBody);
   useEffect(() => {
     getMETA().then((res) => setMETA(res));
   }, []);
   useEffect(() => {
-    getCube(cubeReq)
-      .then((data) => setCube(data))
-      .catch((err) =>
-        showSnackbar("Неудалось выполнить запрос.\n" + JSON.stringify(err))
-      );
+    if (!isSuccess) {
+      setIsSuccess(true);
+    } else {
+      setIsLoading(true);
+      getCube(cubeReq)
+        .then((data) => {
+          setCube(data);
+          localStorage.setItem("backup", JSON.stringify(cubeReq));
+          setIsSuccess(true);
+        })
+        .catch((err) => {
+          setIsSuccess(false);
+          setCubeReq(JSON.parse(localStorage.getItem("backup") || ""));
+          showSnackbar("Неудалось выполнить запрос.\n" + JSON.stringify(err));
+        })
+        .finally(() => setIsLoading(false));
+    }
   }, [cubeReq]);
-
+  const cr = JSON.parse(localStorage.getItem("backup") || "");
   return (
     <>
+      {isLoading && <Loader />}
       {META && (
         <div
           style={{
@@ -61,19 +78,22 @@ function App() {
             padding: "30px 5vw 0",
           }}
         >
-          <ColRows reqBody={cubeReq} meta={META} setReqBody={setCubeReq} />
-          <Metrics reqBody={cubeReq} meta={META} setReqBody={setCubeReq} />
+          <ColRows reqBody={cr} meta={META} setReqBody={setCubeReq} />
+          <Metrics reqBody={cr} meta={META} setReqBody={setCubeReq} />
         </div>
       )}
-      {/* <FilterField set={}/> */}
-      {cube && META && (
+      {cube &&
+      cube.columnValues[0].length +
+        cube.rowValues[0].length +
+        cube.metricValues.length &&
+      META ? (
         <NewTable
-          reqBody={cubeReq}
+          reqBody={cr}
           meta={META}
           data={cube}
           setReqBody={setCubeReq}
         />
-      )}
+      ) : null}
     </>
   );
 }

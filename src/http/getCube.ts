@@ -12,15 +12,11 @@ export const getCube = async (
     .then((response) => {
       if (response.ok)
         return response.json() as unknown as ApiResponse<CubeData>;
-      else throw response.json();
+      else throw response.status;
     })
     .then((resJSON) => {
       if (resJSON.success) {
         return resJSON.data;
       } else throw resJSON.message;
-    })
-    .catch((err) => {
-      console.log(err);
-      throw err.message || err;
     });
 };

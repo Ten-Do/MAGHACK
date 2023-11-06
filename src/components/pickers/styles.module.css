@@ -6,8 +6,11 @@
   align-items: center;
   padding: 10px;
   gap: 16px;
+  flex: 1;
 }
-
+.actions {
+  display: flex;
+}
 .container ul li {
   display: flex;
   align-items: center;
@@ -18,15 +21,16 @@
   cursor: pointer;
 }
 
-.remover {
+.remover, .sorter, .filter {
   max-height: 40px;
   max-width: 40px;
-  cursor: pointer;
+  min-width: 40px;
+  cursor: pointer !important;
   margin-left: 10px;
 }
 
 .remover img,
-.adder img {
+.adder img, .sorter img, .filter img {
   max-width: 100%;
 }
 
@@ -40,9 +44,14 @@
   margin: 5px 0;
 }
 
-.metric {
+.draggable * {
+  cursor: move;
+}
+
+.metric, .draggable {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 /* Hover State */

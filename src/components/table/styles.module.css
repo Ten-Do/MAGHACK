@@ -57,3 +57,7 @@ td {
   margin-left: -1px;
   margin-top: -1px;
 }
+
+.metric_table tr:nth-child(odd) {
+  background-color: rgba(var(--background-primary-rgb), 0.7);
+}

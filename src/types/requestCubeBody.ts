@@ -36,11 +36,10 @@ export interface Metric {
 }
 
 interface Filter {
-  field: Field;
+  metricId: number;
   filterType: FilterType;
   invertResult: boolean;
   rounding: number;
-  canRounding: boolean;
   values: string[];
 }
 
@@ -76,10 +75,10 @@ export interface RequestCubeBody {
   metrics: Metric[];
   metricPlacement?: "COLUMNS" | "ROWS";
   filterGroup?: FilterGroup;
-  metricFilterGroup?: MetricFilterGroup;
+  metricFilterGroup: MetricFilterGroup;
   columnsInterval?: Interval;
   rowsInterval?: Interval;
-  columnSort?: SortDefinition[];
-  rowSort?: SortDefinition[];
+  columnSort: SortDefinition[];
+  rowSort: SortDefinition[];
   allFields?: Field[];
 }

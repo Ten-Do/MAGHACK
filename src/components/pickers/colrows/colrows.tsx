@@ -113,13 +113,18 @@ export const ColRows = ({
                 onDrop={() => handleDragDrop(item)}
                 onDragEnd={handleDragEnd}
               >
-                {item.name}
-              </div>
-              <div
-                className={styles.remover}
-                onClick={() => removeItem("rowFields", item.id)}
-              >
-                <img src="icons/remove.svg" alt="Убрать" />
+                <p>{item.name}</p>
+                <div className={styles.actions}>
+                  <div className={styles.filter}>
+                    <img src="icons/filter.svg" alt="фильтр" />
+                  </div>
+                  <div
+                    className={styles.remover}
+                    onClick={() => removeItem("rowFields", item.id)}
+                  >
+                    <img src="icons/remove.svg" alt="Убрать" />
+                  </div>
+                </div>
               </div>
             </li>
           ))}
@@ -149,13 +154,18 @@ export const ColRows = ({
                 onDrop={() => handleDragDrop(item)}
                 onDragEnd={handleDragEnd}
               >
-                {item.name}
-              </div>
-              <div
-                className={styles.remover}
-                onClick={() => removeItem("columnFields", item.id)}
-              >
-                <img src="icons/remove.svg" alt="убрать" />
+                <p>{item.name}</p>
+                <div className={styles.actions}>
+                  <div className={styles.filter}>
+                    <img src="icons/filter.svg" alt="фильтр" />
+                  </div>
+                  <div
+                    className={styles.remover}
+                    onClick={() => removeItem("columnFields", item.id)}
+                  >
+                    <img src="icons/remove.svg" alt="убрать" />
+                  </div>
+                </div>
               </div>
             </li>
           ))}
@@ -168,16 +178,27 @@ export const ColRows = ({
             setPlace(null);
           }}
         >
-          {free.map((elem) => (
-            <button
-              className="btn accent"
-              onClick={() => {
-                addNewItem({ fieldId: elem.id, fieldType: "REPORT_FIELD" });
-              }}
-            >
-              {elem.name}
-            </button>
-          ))}
+          <h1>Добавить {place === "columnFields" ? "колонки" : "ряды"}</h1>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "10px",
+            }}
+          >
+            {free.map((elem) => (
+              <div
+                className="card"
+                onClick={() => {
+                  addNewItem({ fieldId: elem.id, fieldType: "REPORT_FIELD" });
+                }}
+              >
+                <p>{elem.name}</p>
+                <p className="subtext">{elem.description}</p>
+                <p className="subtext">{elem.type}</p>
+              </div>
+            ))}
+          </div>
         </Modal>
       )}
     </>
