@@ -60,7 +60,7 @@ function App() {
       {cube &&
       META ? (
         <>
-          <NewTable
+          <Table
             reqBody={cr}
             meta={META}
             data={cube}
